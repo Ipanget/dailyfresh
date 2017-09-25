@@ -9,6 +9,7 @@ from django.core.mail import send_mail
 import time
 
 
+
 @task
 def send_register_success_mail(username, password, email):
     """给用户注册邮箱发送"""

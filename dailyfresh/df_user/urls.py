@@ -14,6 +14,15 @@ urlpatterns = [
     url(r'^login/$', views.login),
     # 用户登录校验
     url(r'^login_check/$', views.login_check),
-    #  进入页面
-    url(r'^index/$', views.index),
+    # 用户退出登录
+    url(r'logout/$', views.logout),
+
+    # 显示用户
+    url(r'^$', views.user),
+    #  显示用户收货地址
+    url(r'^address/$', views.address),
+    # 显示用户订单
+    url(r'^order/$', views.order),
+
+
 ]
