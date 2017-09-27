@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from df_goods.models import Goods, Image
 from df_goods.enums import *
-
+from django.core.paginator import Paginator # 导入分页类
 # Create your views here.
 
 
@@ -37,3 +37,76 @@ def goods_detail(request, goods_id):
     # 使用模板文件
     context = {'goods': goods, 'goods_new': goods_new}
     return render(request, 'df_goods/detail.html', context)
+
+
+def goods_list(request, goods_type_id, pindex):
+    """显示商品列表页面"""
+    # 获取排序方式
+    sort = request.GET.get('sort', 'default')
+    # 根据goods_t_id查询商品信息
+    goods_li = Goods.objects.get_goods_by_type(goods_type_id=goods_type_id, sort=sort)
+    # 根据商品类型查询新品信息
+    goods_new = Goods.objects.get_goods_by_type(goods_type_id=goods_type_id, sort='new', limit=2)
+
+    # 进行分页操作
+    paginator = Paginator(goods_li, 1)
+    # 获取第pindex页的内容
+    pindex = int(pindex)
+    # 返回值是一个page对象
+    goods_li = paginator.page(pindex)
+
+    # 获取分页后的总页数
+    nums_pages = paginator.num_pages
+    # 控制页码列表
+    if nums_pages < 5:
+        pages = range(1, nums_pages + 1)
+    elif pindex <= 3:
+        pages = range(1, 6)
+    elif nums_pages - pindex < 2:
+        pages = range(nums_pages-4, nums_pages + 1)
+    else:
+        pages = range(pindex-2, pindex+3)
+
+    # 定义上下文
+    context = {'goods_new': goods_new, 'goods_li': goods_li,
+               'type_id': goods_type_id, 'sort': sort, 'pages': pages, 'type_title': GOODS_TYPE[int(goods_type_id)]}
+
+    # 使用模板文件
+    return render(request, 'df_goods/list.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -47,7 +47,7 @@ class GoodsManager(BaseManager):
         if sort == 'new':
             order_by = ('-create_time', )
         elif sort == 'price':
-            order_by = ('price', )
+            order_by = ('goods_price', )
         elif sort == 'hot':
             order_by = ('-goods_sales', )
 
