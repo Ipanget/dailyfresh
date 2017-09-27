@@ -38,9 +38,19 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'df_user', #  用户模块
+    'df_user',  # 用户模块
     # 'djcelery',
+    'df_goods',  # 商品模块
+    'tinymce',  # 富文本编辑器
 )
+
+# 富文本编辑器配置
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
 
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +138,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -139,7 +152,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'  # 借用qq的免费SMTP服务来充当 一个发送邮件的服务器
 EMAIL_PORT = 25
 #发送邮件的邮箱
-EMAIL_HOST_USER = '2219432856@qq.com'# 改
+EMAIL_HOST_USER = '2219432856@qq.com'  # 改
 #在邮箱中设置的客户端授权密码
 EMAIL_HOST_PASSWORD = 'dfttgcylnuuudjbc'
 #收件人看到的发件人
