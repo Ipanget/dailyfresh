@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from df_goods.models import Goods, Image
 from df_goods.enums import *
-from django.core.paginator import Paginator # 导入分页类
+from django.core.paginator import Paginator  # 导入分页类
 # Create your views here.
+
+# http://127.0.0.1:8000
 
 
 def home_list_page(request):
@@ -13,11 +15,22 @@ def home_list_page(request):
     fruits_new = Goods.objects.get_goods_by_type(goods_type_id=FRUIT, limit=3, sort='new')
     seafood = Goods.objects.get_goods_by_type(goods_type_id=SEAFOOD, limit=4)
     seafood_new = Goods.objects.get_goods_by_type(goods_type_id=SEAFOOD, limit=3, sort='new')
+    meat = Goods.objects.get_goods_by_type(goods_type_id=MEAT, limit=4)
+    meat_new = Goods.objects.get_goods_by_type(goods_type_id=MEAT, limit=3, sort='new')
+    eggs = Goods.objects.get_goods_by_type(goods_type_id=EGGS, limit=4)
+    eggs_new = Goods.objects.get_goods_by_type(goods_type_id=EGGS, limit=3, sort='new')
+    vegetables = Goods.objects.get_goods_by_type(goods_type_id=VEGETABLES, limit=4)
+    vegetables_new = Goods.objects.get_goods_by_type(goods_type_id=VEGETABLES, limit=3, sort='new')
+    frozen = Goods.objects.get_goods_by_type(goods_type_id=FROZEN, limit=4)
+    frozen_new = Goods.objects.get_goods_by_type(goods_type_id=FROZEN, limit=3, sort='new')
 
     #  组织上下文数据
     context = {
         'fruits': fruits, 'fruits_new': fruits_new,
-        'seafood': seafood, 'seafood_new': seafood_new
+        'seafood': seafood, 'seafood_new': seafood_new, 'meat': meat,
+        'meat_new': meat_new, 'eggs': eggs, 'eggs_new': eggs_new, 'vegetables': vegetables,
+        'vegetables_new': vegetables_new, 'frozen': frozen, 'frozen_new': frozen_new,
+
     }
     return render(request, 'df_goods/index.html', context)
 
@@ -73,6 +86,7 @@ def goods_list(request, goods_type_id, pindex):
 
     # 使用模板文件
     return render(request, 'df_goods/list.html', context)
+
 
 
 

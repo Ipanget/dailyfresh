@@ -22,9 +22,13 @@ urlpatterns = [
     # 用户模块
     url(r'^user/', include('df_user.urls')),
 
+
+    #  全文检索框架
+    url(r'^search/', include('haystack.urls')),
+
+    #  购物车模块
+    url(r'^cart/', include('df_cart.urls')),
+
     #  商品模块
     url(r'^', include('df_goods.urls')),
-
-
-
 ]

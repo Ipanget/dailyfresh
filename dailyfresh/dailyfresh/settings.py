@@ -39,18 +39,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'df_user',  # 用户模块
-    # 'djcelery',
+    # 'djcelery',# 邮件发送
     'df_goods',  # 商品模块
     'tinymce',  # 富文本编辑器
+    'haystack',  # 全文检索
+    'df_cart',  # 购物车模块
+
 )
-
-# 富文本编辑器配置
-
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'advanced',
-    'width': 600,
-    'height': 400,
-}
 
 
 MIDDLEWARE_CLASSES = (
@@ -163,8 +158,33 @@ EMAIL_USE_TLS = True
 
 # celcry配置
 
-import djcelery
+# import djcelery
 #  去每一个注册的应用下 找 taks.py 文件，到文件中去找celcery任务函数
-djcelery.setup_loader()
+# djcelery.setup_loader()
 # 指定Redis
 BROKER_URL = 'redis://127.0.0.1:6379/2'
+
+
+# 富文本编辑器配置
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 400,
+}
+
+
+# 搜索引擎配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        #索引文件路径
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+#当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 6  # 指定搜索结果每页显示的数目

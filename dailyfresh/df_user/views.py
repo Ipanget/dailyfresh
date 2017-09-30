@@ -3,7 +3,7 @@ from df_user.models import Passport, Address
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.conf import settings
-from django.core.mail import send_mail # 导入发送邮件函数
+# from django.core.mail import send_mail # 导入发送邮件函数
 import time
 from df_user.tasks import send_register_success_mail   # 导入任务函数
 from utils.decorators import login_required  # 导入登录判断装饰器函数
@@ -164,7 +164,7 @@ def address(request):
                                         recipient_phone=recipient_phone,
                                         zip_code=zip_code)
         # 3.刷新address页面，重定向
-        return redirect('/user/address/') # get方式访问
+        return redirect('/user/address/')  # get方式访问
 # /user/order/
 
 

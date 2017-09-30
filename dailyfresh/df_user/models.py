@@ -10,7 +10,7 @@ class PassportManager(BaseManager):
     # def add_one_object(self, **kwargs)
     def add_one_passport(self, username, password, email):
         """添加一个用户注册信息"""
-        obj = self.create_one_object(username=username, password=password, email=email)
+        obj = self.create_one_object(username=username, password=get_hash(password), email=email)
         # 返回obj
         return obj
 

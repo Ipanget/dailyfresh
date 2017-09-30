@@ -72,7 +72,7 @@ $(function(){
 				error_name = true
 			}
 			else {
-				$('#user_name').next().hide()
+				$('#user_name').next().hide();
 				error_name = false
 			}
 
@@ -83,6 +83,7 @@ $(function(){
     function check_user_name_exist2(async) {
 		//1、获取用户名
 		username = $('#user_name').val();
+
 		//2、发起ajax请求
 		$.ajax({
 			'url':'/user/check_user_exist/?username=' + username,
@@ -147,7 +148,7 @@ $(function(){
 		}
 		else
 		{
-			$('#email').next().html('你输入的邮箱格式不正确')
+			$('#email').next().html('你输入的邮箱格式不正确');
 			$('#email').next().show();
 			error_check_password = true;
 		}
@@ -155,12 +156,15 @@ $(function(){
 	}
 
 
-	$('#reg_form').submit(function() {
+	$('#reg_form2').submit(function() {
 		check_user_name();
 		check_pwd();
 		check_cpwd();
 		check_email();
-		check_user_name_exist2(false);  // 同步
+		if (error_name == false){
+		//	校验用户名是否存在 true: 同步
+			check_user_name_exist2(true);
+		}
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
 		{
 			return true;
@@ -174,9 +178,4 @@ $(function(){
 
 
 
-
-
-
-
-
-})
+});

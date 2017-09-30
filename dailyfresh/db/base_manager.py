@@ -34,13 +34,11 @@ class BaseManager(models.Manager):
         valid_fields = self.get_all_valid_fields()
         # 拷贝kwargs
         kws = copy.copy(kwargs)
-
         # 去除kwargs中的无效参数
         for key in kws:
             if key not in valid_fields:
                 # 去除无效参数
                 kwargs.pop(key)
-
         # 1.获取self所在的模型类
         model_class = self.model
         # 2.创建一个model_class类对象

@@ -4,7 +4,7 @@ from hashlib import sha1
 def get_hash(str, salt=None):
     """取一个字符串散列值"""
     #  提高字符串的复杂度
-    str = '!@#$' + str + '*&^%'
+    str = '!@#$%^' + str + '&*(()'
     if salt:
         str = str + salt
         #  取字符串散列值

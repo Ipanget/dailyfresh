@@ -12,6 +12,4 @@ urlpatterns = [
     url(r'^list/(?P<goods_type_id>\d+)/(?P<pindex>\d+)/$', views.goods_list),
 
 
-
-
 ]
